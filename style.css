@@ -26,7 +26,7 @@
   font-family: sans-serif;
 }
 #grid{
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -39,11 +39,28 @@
   display: flex;
   justify-content: center;
 }
-#reset{
-  border-radius: 2rem;
-  width: 10rem;
-  height: 2rem;
-  margin-top: 2rem;
-  font-family: sans-serif;
-  font-size: large;
+#nameLabel, #nameInput, #submit, #formError{
+  font-size: medium;
+}
+#submit, #reset, #start{
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #576cd5;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+#submit:hover, #reset:hover, #start:hover {
+  background-color: #576cd5
+}
+#submit:active, #reset:active, #start:active {
+  background-color: #576cd5;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }

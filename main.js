@@ -1,19 +1,17 @@
-const gameBoard = ( () => {
-  let gameBoard = [];
-  const createBoard = function () {
-    let board = document.getElementById('grid')
-    for(let i = 0; i<9; i++){
-      let eachBox = document.createElement('div')
-      eachBox.setAttribute('class', 'box')
-      eachBox.setAttribute('id', i)
-
-    gameBoard.push(board.appendChild(eachBox))
-    }
-  }
+const gameBoard = () => {
+  let board = [];
+  let displayBoard = document.getElementById('grid');
+  displayBoard.style.display = 'flex';
+    for (let i = 0; i < 9; i++) {
+      let eachBox = document.createElement('div');
+      eachBox.setAttribute('class', 'box');
+      eachBox.setAttribute('id', i);
+      board.push(displayBoard.appendChild(eachBox));
+    };
   return {
-    createBoard
+    board
   }
-})();
+};
 
 const createPlayer = (name, symbol) => {
   return {
@@ -22,18 +20,17 @@ const createPlayer = (name, symbol) => {
   }
 };
 
-const game = (() => {
-  let board = gameBoard.createBoard();
+const game = (players) => {
+  let board = gameBoard();
   const winningCombos = [
    [0, 1, 2], [3, 4, 5], [6, 7, 8],
    [0, 3, 6], [1, 4, 7], [2, 5, 8],
    [6, 4, 2], [8, 4, 0]
   ];
-  let player1 = createPlayer('player 1', 'X');
-  let player2 = createPlayer('player2', 'O');
+  const [player1, player2] = players
   let options = Array.from(document.querySelectorAll('.box'));
   let message = document.getElementById('info');
-  message.textContent = "Player 1 it's your turn!";
+  message.textContent =  `${player1.name} it's your turn!`;
   let playerOnePositions = [];
   let playerTwoPositions = [];
   let playerOneWin = [];
@@ -90,13 +87,13 @@ const game = (() => {
         turn++;
         checkWin(options);
         if(playerOneWin.includes(3)){ return annouceWinner(player1) }
-          else{message.textContent = "Player 2 its your turn!"};
+          else{message.textContent = `${player2.name} it's your turn!`};
       } else if(turn % 2 == 1 && this.textContent == '') {
         this.textContent = player2.symbol;
         turn++;
         checkWin(options)
         if(playerTwoWin.includes(3)){ return annouceWinner(player2) }
-          else{ message.textContent = "Player 1 its your turn!" };
+          else{ message.textContent = `${player1.name} it's your turn!` };
         }
       } if(turn == 9){
         message.textContent = "Its a tie!"
@@ -111,5 +108,67 @@ const game = (() => {
     window.location.reload();
     });
   }
+};
 
+const createPlayerForm = () =>{
+  let formLabel = document.createElement('label')
+  formLabel.setAttribute('id', 'nameLabel')
+  formLabel.innerHTML = 'Player 1 name '
+  let formInput = document.createElement('input')
+  formInput.setAttribute('id', 'nameInput')
+  let formError = document.createElement('p')
+  formError.style.color = 'red'
+  formError.setAttribute('id', 'formError')
+  let submit = document.createElement('button')
+  submit.setAttribute('id', 'submit')
+  submit.innerHTML = 'Create'
+  let form = document.getElementById('title')
+  form.append(formLabel)
+  form.append(formInput)
+  form.append(formError)
+  form.append(submit)
+  let players = [];
+
+  submit.addEventListener('click', (e) => {
+      e.preventDefault();
+      formError.innerHTML = '';
+      let name = formInput.value
+      let regex = /\w/;
+      let symbol;
+      if(players.length == 0) {
+        symbol = 'X'}
+      if(players.length == 1) {
+        symbol = 'O'
+      }
+      if(name.match(regex)){
+        let player = createPlayer(name, symbol)
+        players.push(player)
+        formInput.value = '';
+        formLabel.innerHTML = 'Player 2 name '
+      }else{
+        formError.innerHTML = "Please enter at least one character that hasnt been selected"
+      }
+      if(players.length == 2){
+        form.removeChild(formLabel);
+        form.removeChild(formInput);
+        form.removeChild(formError);
+        form.removeChild(submit);
+        game(players)
+      }
+    })
+}
+
+const startAGame = (() => {
+  let displayButton = document.getElementById('title')
+  let startButton = document.createElement('button')
+  startButton.innerHTML = 'Start A Game!'
+  startButton.setAttribute('id', 'start')
+  displayButton.appendChild(startButton);
+
+  startButton.addEventListener('click', (e)=> {
+    e.preventDefault();
+    createPlayerForm();
+    displayButton.removeChild(startButton)
+  })
 })();
+;
