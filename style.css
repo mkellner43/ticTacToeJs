@@ -16,8 +16,12 @@
   font-size: 2rem;
   font-family: sans-serif;
 }
+#formError{
+  padding: 0;
+  margin: 0;
+}
 #title {
-  padding-top: 5rem;
+  padding-top: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,10 +43,18 @@
   display: flex;
   justify-content: center;
 }
-#nameLabel, #nameInput, #submit, #formError{
-  font-size: medium;
+#nameLabel, #formError{
+  font-size: large;
+  margin-bottom: 1rem;
 }
-#submit, #reset, #start{
+#nameInput{
+  text-align: center;
+  font-size: large;
+  border-radius: 4px;
+  width: 25%;
+  padding: 0.3rem;
+}
+#submit, #reset, #start, #playAgain{
   display: inline-block;
   padding: 15px 25px;
   font-size: 24px;
@@ -55,11 +67,12 @@
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #999;
+  margin-top: 1rem;
 }
-#submit:hover, #reset:hover, #start:hover {
+#submit:hover, #reset:hover, #start:hover, #playAgain:hover {
   background-color: #576cd5
 }
-#submit:active, #reset:active, #start:active {
+#submit:active, #reset:active, #start:active, #playAgain:active {
   background-color: #576cd5;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
