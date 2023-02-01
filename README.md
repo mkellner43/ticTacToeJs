@@ -1,1 +1,2 @@
 # ticTacToeJs
+This project is a simple TicTacToe game built using HTML and JavaScript DOM manipulation and event listeners. This project is available to view and play here: https://mkellner43.github.io/ticTacToeJs/
