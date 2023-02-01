@@ -6,8 +6,18 @@ const gameBoard = () => {
       let eachBox = document.createElement('div');
       eachBox.setAttribute('class', 'box');
       eachBox.setAttribute('id', i);
-      board.push(displayBoard.appendChild(eachBox));
+      if(i <= 2) {
+        document.getElementById('rowOne').appendChild(eachBox)
+      }
+      if(i > 2 && i <= 5) {
+        document.getElementById('rowTwo').appendChild(eachBox)
+      }
+      if(i >= 6) {
+        document.getElementById('rowThree').appendChild(eachBox)
+      }
+      board.push(eachBox);
     };
+    console.log(board)
   return {
     board
   }
@@ -82,8 +92,9 @@ const game = (players) => {
     });
     
     playAgain.addEventListener('click', () => {
-      let gameGrid = document.getElementById('grid')
-      gameGrid.innerHTML = ""
+      document.getElementById('rowOne').innerHTML = ''
+      document.getElementById('rowTwo').innerHTML = ''
+      document.getElementById('rowThree').innerHTML = ''
       game(players);
     })
   };

@@ -2,11 +2,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 10rem;
-  width: 10rem;
   border-style: solid;
-  font-size: 10rem;
+  height: 100%;
+  width: 100%;
+  font-size: clamp(16px, 20vw, 160px);
   font-family: sans-serif;
+  flex-grow: 0;
 }
 #info {
   display: flex;
@@ -29,15 +30,30 @@
   font-size: 2rem;
   font-family: sans-serif;
 }
+
+#rowOne,
+#rowTwo,
+#rowThree {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-grow: 0;
+  width: 100%;
+  height: 100%;
+}
+
 #grid{
   display: none;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  height: 31.125rem;
-  width: 31.125rem;
   border-style: solid;
   border-width: 6px;
+  height: 80vw;
+  width: 80vw;
+  min-width: 300px;
+  min-height: 300px;
+  max-width: 600px;
+  max-height: 600px;
 }
 #border{
   display: flex;
