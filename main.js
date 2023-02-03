@@ -77,15 +77,17 @@ const game = (players) => {
   }
 
   function resetGame() {
-    let playAgain = document.createElement('button');
-    playAgain.innerHTML = 'Play Again!';
-    playAgain.setAttribute('id', 'playAgain');
-    message.appendChild(playAgain)
-
-    let reset = document.createElement('button');
-    reset.textContent = 'Reset';
-    reset.setAttribute('id', 'reset');
-    message.appendChild(reset);
+    if(!document.getElementById('playAgain') && !document.getElementById('reset')){
+      let playAgain = document.createElement('button');
+      playAgain.innerHTML = 'Play Again!';
+      playAgain.setAttribute('id', 'playAgain');
+      message.appendChild(playAgain)
+      
+      let reset = document.createElement('button');
+      reset.textContent = 'Reset';
+      reset.setAttribute('id', 'reset');
+      message.appendChild(reset);
+    }
 
     reset.addEventListener('click', () => {
       window.location.reload();
